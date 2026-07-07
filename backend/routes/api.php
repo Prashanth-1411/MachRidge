@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Public routes
+Route::get('health', function () {
+    return response()->json(['status' => 'healthy', 'timestamp' => now()]);
+});
+
 Route::get('hero-sliders', [FrontendController::class, 'getHeroSliders']);
 Route::get('products', [FrontendController::class, 'getProducts']);
 Route::get('products/{slug}', [FrontendController::class, 'getProduct']);
