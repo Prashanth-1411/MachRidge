@@ -33,6 +33,14 @@ use Illuminate\Http\JsonResponse;
 
 class FrontendController extends Controller
 {
+    public function health(): JsonResponse
+    {
+        return response()->json([
+            'status' => 'healthy',
+            'timestamp' => now()->toIso8601String(),
+        ]);
+    }
+
     public function getHeroSliders(): JsonResponse
     {
         $sliders = HeroSlider::active()->ordered()->get();
