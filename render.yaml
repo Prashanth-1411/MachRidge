@@ -19,7 +19,7 @@ services:
         fromService:
           name: machridge-backend
           type: web
-          property: url
+          property: hostport
       - key: DB_CONNECTION
         value: mysql
       - key: DB_HOST
@@ -56,11 +56,7 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
-        fromService:
-          name: machridge-backend
-          type: web
-          property: url
-          path: /api
+        value: https://machridge-backend.onrender.com/api
       - key: VITE_APP_NAME
         value: MachRidge Industries
 
