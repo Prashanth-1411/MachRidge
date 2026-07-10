@@ -23,9 +23,15 @@ services:
       - key: DB_CONNECTION
         value: mysql
       - key: DB_HOST
-        fromDatabase:
+        fromService:
           name: machridge-db
+          type: pserv
           property: host
+      - key: DB_PASSWORD
+        fromService:
+          name: machridge-db
+          type: pserv
+          envVarKey: MYSQL_PASSWORD
       - key: DB_PORT
         value: 3306
       - key: DB_DATABASE
@@ -59,10 +65,22 @@ services:
       - key: VITE_APP_NAME
         value: MachRidge Industries
 
-databases:
-  - name: machridge-db
+  - type: pserv
+    name: machridge-db
+    runtime: docker
+    image: mysql:8.0
     plan: free
     region: oregon
-    type: mysql
-    databaseName: machridge
-    user: machridge
+    envVars:
+      - key: MYSQL_ROOT_PASSWORD
+        generateValue: true
+      - key: MYSQL_DATABASE
+        value: machridge
+      - key: MYSQL_USER
+        value: machridge
+      - key: MYSQL_PASSWORD
+        generateValue: true
+    disk:
+      name: mysql-data
+      mountPath: /var/lib/mysql
+      sizeGB: 10
