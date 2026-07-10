@@ -63,6 +63,6 @@ databases:
   - name: machridge-db
     plan: free
     region: oregon
+    type: mysql
     databaseName: machridge
     user: machridge
-    postgresMajorVersion: 16
