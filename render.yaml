@@ -23,9 +23,8 @@ services:
       - key: DB_CONNECTION
         value: mysql
       - key: DB_HOST
-        fromService:
+        fromDatabase:
           name: machridge-db
-          type: database
           property: host
       - key: DB_PORT
         value: 3306
